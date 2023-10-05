@@ -6,13 +6,27 @@ ldapwhoamiコマンドの終了ステータスで認証の成功/失敗を判定
 ### Usage
 1. リポジトリをクローンします。
 ```
-git clone https://git.3naly.xyz/minawa/LDAP_for_nginx.git
+$ git clone https://git.3naly.xyz/minawa/LDAP_for_nginx.git
 ```
 
 2. docker-compose.ymlのポートや環境変数を書き換えます。  
 デフォルトのポートは8811にしています。  
 ```
-cd LDAP_for_nginx
+$ cd LDAP_for_nginx
+$ cat docker-compose.yml
+		.
+		.
+		.
+        ports:
+          - 8811:80
+        environment:
+          - LDAP_HOST=##LDAP_SERVER_HOST##
+          - LDAP_PORT=389
+          - LDAP_BASE_DN=##LDAP_BASE_DN(e.g.ou=group,dc=hoge,dc=xyz)##
+          - REDIRECT=/
+		.
+		.
+		.
 ```
 
 * LDAP_HOST : LDAPサーバーのホストアドレス
@@ -23,7 +37,7 @@ cd LDAP_for_nginx
 
 3. コンテナの起動
 ```
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 4. nginx設定ファイルの設置  
@@ -31,5 +45,5 @@ example.confを参考にして.confファイルを作成し、/etc/nginx/conf.d�
 その後、nginxを再起動します。
 
 ```
-sudo nginx -s reload
+$ sudo nginx -s reload
 ```
