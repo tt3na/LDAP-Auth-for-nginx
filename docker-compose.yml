@@ -1,0 +1,16 @@
+version: '3.0'
+services:
+  centos:
+        image: ldap-auth:latest
+        build: .
+        container_name: "ldap-auth"
+        volumes:
+          - "./data:/home/abc"
+        ports:
+          - 8811:80
+        environment:
+          - LDAP_HOST=##LDAP_SERVER_HOST##
+          - LDAP_PORT=389
+          - LDAP_BASE_DN=##LDAP_BASE_DN(e.g.ou=group,dc=hoge,dc=xyz)##
+          - REDIRECT=/
+        tty: true
