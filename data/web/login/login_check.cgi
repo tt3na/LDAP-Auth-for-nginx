@@ -42,6 +42,7 @@ user=$(awk '$1=="USER"{print $2}' $tmp-name)
 # パスワードを扱うのでログの記録停止
 set +vx
 trap : ERR
+
 pass=$(awk '$1=="PASSWORD"{print $2}' $tmp-name)
 phash=$(echo $pass | md5sum | awk '{print $1}')
 
@@ -70,7 +71,7 @@ if [ $code -eq 0 ];then
 	login $todayhms
 	FIN
 	echo "Content-type: text/html"
-	echo "Set-Cookie: sessionId=$sesid; path=/; expires=$(LANG=en_US;date -u +"%a, %d %b %Y 14:59:59 GMT")"
+	echo "Set-Cookie: sessionId=$sesid; path=/; expires=$(LANG=en_US;date +"%a, %d %b %Y 14:59:59 GMT")"
 	echo ""
 	cat <<- FIN
 	<!DOCTYPE html>
