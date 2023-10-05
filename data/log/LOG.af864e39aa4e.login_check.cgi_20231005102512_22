@@ -1,0 +1,96 @@
+
+ERROR_HOLDER(){
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "error"
+	rm -rf $tmp-*
+	exit 1	
+}
+
+trap ERROR_HOLDER ERR
++ trap ERROR_HOLDER ERR
+set -o pipefail
++ set -o pipefail
+
+if [ -n "$CONTENT_LENGTH" ];then
+	dd bs=$CONTENT_LENGTH	|
+	sed 's/&/\n/g'		| 
+	sed 's/=/ /g'	> $tmp-name
+else
+	: > $tmp-name
+fi
++ '[' -n 27 ']'
++ dd bs=27
++ sed 's/&/\n/g'
++ sed 's/=/ /g'
+1+0 records in
+1+0 records out
+27 bytes (27 B) copied, 0.000333106 s, 81.1 kB/s
+
+if [ -n "$QUERY_STRING" ];then
+	echo "$QUERY_STRING"	|
+	sed 's/&/\n/g' 		| 
+	sed 's/=/ /g'   > $tmp-get
+else
+	: > $tmp-get
+fi
++ '[' -n '' ']'
++ :
+
+user=$(awk '$1=="USER"{print $2}' $tmp-name)
+++ awk '$1=="USER"{print $2}' /tmp/tmp_22-name
++ user=tabu
+
+# パスワードを扱うのでログの記録停止
+set +vx
++ set +vx
+trap ERROR_HOLDER ERR
++ trap ERROR_HOLDER ERR
+
+if [ $code -eq 0 ];then
+	sesid=$(echo $todayhms$user | md5sum | awk '{print $1}')
+	cat <<- FIN > $sesd/SESSION.$sesid
+	sessionid $sesid
+	user $user
+	login $todayhms
+	FIN
+	echo "Content-type: text/html"
+	echo "Set-Cookie: sessionId=$sesid; path=/; expires=$(LANG=en_US;date +"%a, %d %b %Y 14:59:59 GMT")"
+	echo ""
+	cat <<- FIN
+	<!DOCTYPE html>
+	<html>
+		<head>
+		</head>
+		<body onload="location.href='$REDIRECT'"></body>
+	</html>
+	FIN
+else
+	echo "Content-type: text/html"
+	echo ""
+	cat <<- FIN
+	<!DOCTYPE html>
+	<html>
+		<head>
+		</head>
+		<body onload="location.href='/login'"></body>
+	</html>
+	FIN
+fi
++ '[' 0 -eq 0 ']'
+++ echo 20231005102512tabu
+++ md5sum
+++ awk '{print $1}'
++ sesid=26f557f59d6bb0b00c3ddda15b35524c
++ cat
++ echo 'Content-type: text/html'
+++ LANG=en_US
+++ date '+%a, %d %b %Y 14:59:59 GMT'
++ echo 'Set-Cookie: sessionId=26f557f59d6bb0b00c3ddda15b35524c; path=/; expires=Thu, 05 Oct 2023 14:59:59 GMT'
++ echo ''
++ cat
+
+rm -rf $tmp-*
++ rm -rf /tmp/tmp_22-get /tmp/tmp_22-name
+exit 0
++ exit 0

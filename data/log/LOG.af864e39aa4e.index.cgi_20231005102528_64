@@ -1,0 +1,54 @@
+
+ERROR_HOLDER(){
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "error"
+	rm -rf $tmp-*
+	exit 1	
+}
+
+trap ERROR_HOLDER ERR
++ trap ERROR_HOLDER ERR
+set -o pipefail
++ set -o pipefail
+
+# Cookieの取得とセッション管理
+if [ ! -z "$HTTP_COOKIE" ]; then
+        echo "$HTTP_COOKIE"                    |
+        sed 's/; /\n/g'                        |
+        sed 's/=/ /g'                      > $tmp-cookie
+
+        # CookieよりセッションIDを取得
+        sessionid=$(awk '$1=="sessionId"{print $2}' $tmp-cookie)
+else
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "ログインしてください"
+	rm -rf $tmp-*
+	exit 0
+fi
++ '[' '!' -z sessionId= ']'
++ echo sessionId=
++ sed 's/; /\n/g'
++ sed 's/=/ /g'
+++ awk '$1=="sessionId"{print $2}' /tmp/tmp_64-cookie
++ sessionid=
+
+# セッションファイルが存在しない場合はNG
+if [ ! -s $sesd/SESSION.$sessionid ]; then
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "ログインしてください"
+	rm -rf $tmp-*
+	exit 0
+fi
++ '[' '!' -s /home/abc/session/SESSION. ']'
++ echo 'Status: 403'
++ echo 'Content-type: text/html; charset=UTF-8'
++ echo ''
++ echo $'\343\203\255\343\202\260\343\202\244\343\203\263\343\201\227\343\201\246\343\201\217\343\201\240\343\201\225\343\201\204'
++ rm -rf /tmp/tmp_64-cookie
++ exit 0

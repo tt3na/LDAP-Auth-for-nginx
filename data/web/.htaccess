@@ -1,0 +1,4 @@
+SetEnv LDAP_HOST 192.168.2.105
+SetEnv LDAP_PORT 389
+SetEnv LDAP_BASE_DN ou=grp,dc=3naly,dc=xyz
+SetEnv REDIRECT /

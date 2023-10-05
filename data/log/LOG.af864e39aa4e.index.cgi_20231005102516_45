@@ -1,0 +1,62 @@
+
+ERROR_HOLDER(){
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "error"
+	rm -rf $tmp-*
+	exit 1	
+}
+
+trap ERROR_HOLDER ERR
++ trap ERROR_HOLDER ERR
+set -o pipefail
++ set -o pipefail
+
+# Cookieの取得とセッション管理
+if [ ! -z "$HTTP_COOKIE" ]; then
+        echo "$HTTP_COOKIE"                    |
+        sed 's/; /\n/g'                        |
+        sed 's/=/ /g'                      > $tmp-cookie
+
+        # CookieよりセッションIDを取得
+        sessionid=$(awk '$1=="sessionId"{print $2}' $tmp-cookie)
+else
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "ログインしてください"
+	rm -rf $tmp-*
+	exit 0
+fi
++ '[' '!' -z sessionId=26f557f59d6bb0b00c3ddda15b35524c ']'
++ echo sessionId=26f557f59d6bb0b00c3ddda15b35524c
++ sed 's/; /\n/g'
++ sed 's/=/ /g'
+++ awk '$1=="sessionId"{print $2}' /tmp/tmp_45-cookie
++ sessionid=26f557f59d6bb0b00c3ddda15b35524c
+
+# セッションファイルが存在しない場合はNG
+if [ ! -s $sesd/SESSION.$sessionid ]; then
+	echo "Status: 403"
+	echo "Content-type: text/html; charset=UTF-8"
+	echo ""
+	echo "ログインしてください"
+	rm -rf $tmp-*
+	exit 0
+fi
++ '[' '!' -s /home/abc/session/SESSION.26f557f59d6bb0b00c3ddda15b35524c ']'
+
+echo "Status: 200"
++ echo 'Status: 200'
+echo "Content-type: text/html"
++ echo 'Content-type: text/html'
+echo ""
++ echo ''
+echo "OK"
++ echo OK
+
+rm -rf $tmp-*
++ rm -rf /tmp/tmp_45-cookie
+exit 0
++ exit 0
