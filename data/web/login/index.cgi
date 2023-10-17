@@ -30,6 +30,7 @@ cat << FIN
 		<title>ログイン</title>
 		<script>
 			const init = () =>{
+				if(location.pathname == "/login/") return;
 				document.getElementById("redirect").value = location.pathname;	
 			}
 			const postURL = (url,formId) => {
@@ -132,7 +133,7 @@ cat << FIN
 				<input class="user" id="user" type="text" style="padding-left:5px;" name="USER" />
 				<label for="pass" id="label_pass">パスワード</label>
 				<input class="pass" id="pass" type="password" style="padding-left:5px;" name="PASSWORD" />
-				<input class="redirect" id="redirect" type="hidden" name="REDIRECT" value="" />
+				<input class="redirect" id="redirect" type="hidden" name="REDIRECT" value=".." />
 			</form>
 			<button class="sendBtn" type="button" onclick="postURL('/login/login_check.cgi','FORM')">ログイン</button> 
 			<small style="display:block;margin-top:10px;text-align:right;">LDAP Auth</small>
