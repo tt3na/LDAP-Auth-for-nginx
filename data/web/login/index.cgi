@@ -30,7 +30,7 @@ cat << FIN
 		<title>ログイン</title>
 		<script>
 			const init = () =>{
-				if(location.pathname == "/login/") return;
+				if(location.pathname == "/login" || location.pathname == "/login/") return;
 				document.getElementById("redirect").value = location.pathname;	
 			}
 			const postURL = (url,formId) => {
