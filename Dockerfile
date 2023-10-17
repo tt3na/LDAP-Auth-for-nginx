@@ -6,7 +6,7 @@ ENV TZ Asia/Tokyo
 RUN groupadd -g 1000 abc
 RUN useradd --uid 1000 --gid 1000 --shell /bin/bash -G abc abc
 
-RUN yum install -y httpd openldap-clients
+RUN yum install -y httpd openldap-clients nkf
 
 RUN mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.bak
 
