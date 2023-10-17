@@ -25,6 +25,9 @@ SetEnv LDAP_BASE_DN $LDAP_BASE_DN
 SetEnv REDIRECT $REDIRECT
 FIN
 
+mkdir /home/abc/session
+mkdir /home/abc/log
+
 mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.bak
 
 /usr/sbin/httpd -DFOREGROUND
