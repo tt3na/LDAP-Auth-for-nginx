@@ -53,7 +53,7 @@ if [ "$user" == "" ] || [ "$pass" == "" ]; then
 fi
 
 # LDAP認証
-ldapwhoami -x -D "cn=$user,$LDAP_BASE_DN" -w $pass -H ldap://$LDAP_HOST:$LDAP_PORT
+ldapwhoami -x -D 'cn='"$user"','"$LDAP_BASE_DN"'' -w ''"$pass"'' -H ldap://$LDAP_HOST:$LDAP_PORT
 if [ $? -eq 0 ]; then
     code=0
 else
