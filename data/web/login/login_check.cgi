@@ -38,6 +38,7 @@ else
 fi
 
 user=$(awk '$1=="USER"{print $2}' $tmp-name)
+user_dec=$(printf '%b\n' "${user//%/\\x}")
 redirect_to="$(awk '$1=="REDIRECT"{print $2}' $tmp-name)"
 
 # パスワードを扱うのでログの記録停止
@@ -45,7 +46,7 @@ set +vx
 trap : ERR
 
 pass=$(awk '$1=="PASSWORD"{print $2}' $tmp-name)
-phash=$(echo $pass | md5sum | awk '{print $1}')
+pass_dec=$(printf '%b\n' "${pass//%/\\x}")
 
 # 空判定
 if [ "$user" == "" ] || [ "$pass" == "" ]; then
@@ -53,7 +54,7 @@ if [ "$user" == "" ] || [ "$pass" == "" ]; then
 fi
 
 # LDAP認証
-ldapwhoami -x -D 'cn='"$user"','"$LDAP_BASE_DN"'' -w ''"$pass"'' -H ldap://$LDAP_HOST:$LDAP_PORT
+ldapwhoami -x -D 'cn='"$user_dec"','"$LDAP_BASE_DN"'' -w ''"$pass_dec"'' -H ldap://$LDAP_HOST:$LDAP_PORT
 if [ $? -eq 0 ]; then
     code=0
 else
