@@ -51,14 +51,14 @@ pass_dec=$(printf '%b\n' "${pass//%/\\x}")
 # 空判定
 if [ "$user" == "" ] || [ "$pass" == "" ]; then
 	code=1
-fi
-
-# LDAP認証
-ldapwhoami -x -D 'cn='"$user_dec"','"$LDAP_BASE_DN"'' -w ''"$pass_dec"'' -H ldap://$LDAP_HOST:$LDAP_PORT
-if [ $? -eq 0 ]; then
-    code=0
 else
-    code=1
+	# LDAP認証
+	ldapwhoami -x -D 'cn='"$user_dec"','"$LDAP_BASE_DN"'' -w ''"$pass_dec"'' -H ldap://$LDAP_HOST:$LDAP_PORT
+	if [ $? -eq 0 ]; then
+	    code=0
+	else
+	    code=1
+	fi
 fi
 
 # ログ記録再開
