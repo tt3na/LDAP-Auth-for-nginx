@@ -28,6 +28,9 @@ FIN
 mkdir /home/abc/session
 mkdir /home/abc/log
 
+chown -R abc:abc /home/abc/session
+chown -R abc:abc /home/abc/log
+
 mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.bak
 
 /usr/sbin/httpd -DFOREGROUND
