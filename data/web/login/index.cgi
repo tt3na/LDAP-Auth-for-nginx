@@ -132,7 +132,7 @@ cat << FIN
 				<label for="user">ユーザーID</label>
 				<input class="user" id="user" type="text" style="padding-left:5px;" name="USER" />
 				<label for="pass" id="label_pass">パスワード</label>
-				<input class="pass" id="pass" type="password" style="padding-left:5px;" name="PASSWORD" />
+				<input class="pass" id="pass" type="password" style="padding-left:5px;" name="PASSWORD" onkeydown="if(event.key==='Enter'){postURL('/login/login_check.cgi','FORM');}" />
 				<input class="redirect" id="redirect" type="hidden" name="REDIRECT" value=".." />
 			</form>
 			<button class="sendBtn" type="button" onclick="postURL('/login/login_check.cgi','FORM')">ログイン</button> 
