@@ -31,7 +31,7 @@ cat << FIN
 		<script>
 			const init = () =>{
 				if(location.pathname == "/login" || location.pathname == "/login/") return;
-				document.getElementById("redirect").value = location.pathname;	
+				document.getElementById("redirect").value = location.pathname + location.search;	
 			}
 			const postURL = (url,formId) => {
 				var form = document.getElementById(formId);
