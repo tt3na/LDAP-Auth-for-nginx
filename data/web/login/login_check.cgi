@@ -80,7 +80,7 @@ if [ $code -eq 0 ];then
 	<html>
 		<head>
 		</head>
-		<body onload="location.href='$REDIRECT'"></body>
+		<body onload="location.href='$redirect_to'"></body>
 	</html>
 	FIN
 else
@@ -91,7 +91,7 @@ else
 	<html>
 		<head>
 		</head>
-		<body onload="location.href='/login'"></body>
+		<body onload="location.href='$redirect_to'"></body>
 	</html>
 	FIN
 fi
