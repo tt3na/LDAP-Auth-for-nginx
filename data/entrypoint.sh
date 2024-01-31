@@ -25,9 +25,14 @@ SetEnv LDAP_BASE_DN $LDAP_BASE_DN
 SetEnv REDIRECT $REDIRECT
 FIN
 
+cat << FIN >> /etc/httpd/conf.modules.d/00-mpm.conf
+ScriptSock /var/run/httpd/cgid.sock
+FIN
+
 mkdir /home/abc/session
 mkdir /home/abc/log
 
+chown abc:abc /var/run/httpd
 chown -R abc:abc /home/abc/session
 chown -R abc:abc /home/abc/log
 
