@@ -40,6 +40,9 @@ fi
 user=$(awk '$1=="USER"{print $2}' $tmp-name)
 user_dec=$(printf '%b\n' "${user//%/\\x}")
 redirect_to="$(awk '$1=="REDIRECT"{print $2}' $tmp-name)"
+if [ "$redirect_to" == "" ];then
+	redirect_to="/"
+fi
 
 # パスワードを扱うのでログの記録停止
 set +vx
