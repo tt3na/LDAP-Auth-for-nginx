@@ -38,6 +38,6 @@ chown -R abc:abc /home/abc/log
 
 mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.bak
 
-/usr/sbin/httpd -DFOREGROUND
+exec /usr/sbin/httpd -DFOREGROUND
 
 exit 0
