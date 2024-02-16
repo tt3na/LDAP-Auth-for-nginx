@@ -1,6 +1,6 @@
 version: '3.0'
 services:
-  centos:
+  web:
         image: ldap-auth:latest
         build: .
         container_name: "ldap-auth"
